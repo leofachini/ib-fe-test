@@ -17,7 +17,6 @@ import WeatherState from '../../constants/WeatherState';
 import * as V from '../../styles/variables';
 
 type WeatherCardProps = {
-  title: string,
   weather: Weather
 };
 
@@ -124,7 +123,7 @@ const getWeekDay = (date: string) => {
   return moment(date, 'YYYY-MM-DD').format('dddd');
 };
 
-const WeatherCard: FunctionComponent<WeatherCardProps> = ({ weather, title }) => {
+const WeatherCard: FunctionComponent<WeatherCardProps> = ({ weather }) => {
   
   const icon = getWeatherIconSrc(weather);
 

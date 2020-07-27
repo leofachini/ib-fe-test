@@ -5,7 +5,6 @@ import WeatherCard from '../../components/WeatherCard';
 
 function FiveDaysForecast() {
   // TODO Remove this hardcoded ASAP
-  const title = 'Lisbon';
   const weather = {
       id: 4613971225083904,
       weather_state_name: "Clear",
@@ -24,7 +23,7 @@ function FiveDaysForecast() {
       predictability: 68
   };
 
-  return (<WeatherCard weather={weather} title={title} />);
+  return (<WeatherCard weather={weather} />);
 }
 
 export default FiveDaysForecast;
