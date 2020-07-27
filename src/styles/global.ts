@@ -1,6 +1,6 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
-import * as V from './variables';
+import * as V from "./variables";
 
 const GlobalStyles = createGlobalStyle`
   /* http://meyerweb.com/eric/tools/css/reset/
@@ -100,11 +100,14 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
+    align-items: center;
     background-color: var(--bg);
+    display: flex;
     color: var(--primaryColor);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-size: 2rem;
     height: calc(100vh);
+    justify-content: center;
     min-height: calc(100vh);
     -webkit-overflow-scrolling: touch;
     overflow-x: hidden;
