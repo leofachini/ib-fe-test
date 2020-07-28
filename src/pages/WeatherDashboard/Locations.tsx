@@ -46,6 +46,7 @@ const Locations: FunctionComponent<AllProps> = function Locations({ data, fetchL
   }, [data]);
 
   return (
+    // TODO Add loading or ghost components while waiting response from the user
     <Container>
       {!loading && data &&
         data.map(location => {
