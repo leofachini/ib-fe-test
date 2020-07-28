@@ -11,11 +11,7 @@ function* handleFetch(action:  ReturnType<typeof fetchRequest>)  {
     const resource = `https://www.metaweather.com/api/location/search/?query=`;
     const res = yield all(action.payload.map(location => call(axios.get, `${resource}${location}`)));
 
-    if (res.error) {
-      yield put(fetchError(res.error));
-    } else {
-      yield put(fetchSuccess(res.map((r: any) => r.data[0])));
-    }
+    yield put(fetchSuccess(res.map((r: any) => r.data[0])));
   } catch (err) {
     if (err instanceof Error && err.stack) {
       yield put(fetchError(err.stack));
