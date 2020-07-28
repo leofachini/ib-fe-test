@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import FiveDaysForecast from './FiveDaysForecast';
-import Places from './Places';
+import Locations from './Locations';
 import * as V from '../../styles/variables';
 
 const Dashboard = styled.section.attrs({
@@ -22,7 +22,7 @@ const Dashboard = styled.section.attrs({
 function WeatherDashboard() {
   return (
     <Dashboard>
-      <Places />
+      <Locations />
       <FiveDaysForecast />
     </Dashboard>
   );
