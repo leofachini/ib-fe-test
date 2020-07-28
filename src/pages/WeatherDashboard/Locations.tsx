@@ -29,7 +29,7 @@ const Container = styled.section.attrs({
   justify-content: space-evenly;
 `;
 
-const Locations: FunctionComponent<AllProps> = function Locations({ data, fetchLocations, loading, selectedLocation = {}, setSelectedLocation}) {
+const Locations: FunctionComponent<AllProps> = ({ data, fetchLocations, loading, selectedLocation = {}, setSelectedLocation}) => {
 
   useEffect(() => {
     if (!data || data.length === 0) {
@@ -43,7 +43,7 @@ const Locations: FunctionComponent<AllProps> = function Locations({ data, fetchL
     } else {
       setSelectedLocation(data[0]);
     }
-  }, [data]);
+  }, [data, fetchLocations, setSelectedLocation]);
 
   return (
     // TODO Add loading or ghost components while waiting response from the user
