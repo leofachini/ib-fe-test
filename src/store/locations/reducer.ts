@@ -23,7 +23,10 @@ const reducer: Reducer<LocationState> = (state = initialState, action) => {
       return { ...state, loading: false, data: action.payload };
     }
     case LocationsActionTypes.SELECT_LOCATION: {
-      return { ...state, selectedLocation: action.payload };
+      if (state.selectedLocation?.woeid !== action.payload.woeid) {
+        return { ...state, selectedLocation: action.payload };
+      }
+      return state;
     }
     default: {
       return state;
