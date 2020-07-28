@@ -1,29 +1,68 @@
-import React from 'react';
-// import styled from 'styled-components';
+import React, { FunctionComponent, useEffect } from 'react';
+import { connect } from 'react-redux';
+import styled from 'styled-components';
 
+import { ApplicationState } from '../../store';
+import { Location } from '../../store/locations/types';
 import WeatherCard from '../../components/WeatherCard';
+import { fetchRequest, Weather } from '../../store/weatherForecast';
 
-function FiveDaysForecast() {
-  // TODO Remove this hardcoded ASAP
-  const weather = {
-      id: 4613971225083904,
-      weather_state_name: "Clear",
-      weather_state_abbr: "c",
-      wind_direction_compass: "NNW",
-      created: "2020-07-25T13:38:50.367908Z",
-      applicable_date: "2020-07-25",
-      min_temp: 18.515,
-      max_temp: 27.979999999999997,
-      the_temp: 28.155,
-      wind_speed: 10.321142229422838,
-      wind_direction: 348.5,
-      air_pressure: 1015.0,
-      humidity: 53,
-      visibility: 15.123242762268353,
-      predictability: 68
-  };
-
-  return (<WeatherCard weather={weather} />);
+interface PropsFromState {
+  selectedLocation?: Location,
+  loading: boolean,
+  data: Weather[],
+  errors?: string
 }
 
-export default FiveDaysForecast;
+interface PropsFromDispatch {
+  fetchWeatherForecast: typeof fetchRequest
+}
+
+type AllProps = PropsFromState & PropsFromDispatch;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: space-evenly
+`;
+
+const FiveDaysForecast: FunctionComponent<AllProps> = ({ data, fetchWeatherForecast, loading, selectedLocation}) => {
+
+  useEffect(() => {
+    if (selectedLocation) {
+      fetchWeatherForecast(selectedLocation.woeid);
+    }
+  }, [selectedLocation, fetchWeatherForecast]);
+  
+  return (
+    <Container>
+      {!loading && data.map(weather => {
+        return <WeatherCard
+          key={weather.id}
+          weather={weather} />;
+      })}
+    </Container>
+  );
+}
+
+// It's usually good practice to only include one context at a time in a connected component.
+// Although if necessary, you can always include multiple contexts. Just make sure to
+// separate them from each other to prevent prop conflicts.
+const mapStateToProps = ({ locations, weatherForecast }: ApplicationState) => ({
+  loading: weatherForecast.loading,
+  errors: weatherForecast.errors,
+  data: weatherForecast.data,
+  selectedLocation: locations.selectedLocation
+});
+
+// mapDispatchToProps is especially useful for constraining our actions to the connected component.
+// You can access these via `this.props`.
+const mapDispatchToProps = {
+  fetchWeatherForecast: fetchRequest
+};
+
+// Now let's connect our component!
+// With redux v4's improved typings, we can finally omit generics here.
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FiveDaysForecast);
