@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useEffect } from 'react';
+import ReactLoading from 'react-loading';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
@@ -6,6 +7,7 @@ import { ApplicationState } from '../../store';
 import { Location } from '../../store/locations/types';
 import WeatherCard from '../../components/WeatherCard';
 import { fetchRequest, Weather } from '../../store/weatherForecast';
+import * as V from '../../styles/variables';
 
 interface PropsFromState {
   selectedLocation?: Location,
@@ -35,11 +37,13 @@ const FiveDaysForecast: FunctionComponent<AllProps> = ({ data, fetchWeatherForec
   
   return (
     <Container>
-      {!loading && data.map(weather => {
-        return <WeatherCard
-          key={weather.id}
-          weather={weather} />;
-      })}
+      {loading ? 
+        <ReactLoading type='spin' color={V.Color.blue}/> :
+        data.map(weather => {
+          return <WeatherCard
+            key={weather.id}
+            weather={weather} />;
+        })}
     </Container>
   );
 }

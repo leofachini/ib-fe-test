@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useEffect } from 'react';
+import ReactLoading from 'react-loading';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
@@ -6,6 +7,7 @@ import { ApplicationState } from '../../store';
 import CustomBtn from '../../components/CustomBtn';
 import { fetchRequest, selectLocation } from '../../store/locations/actions';
 import { Location } from '../../store/locations/types';
+import * as V from '../../styles/variables';
 
 interface PropsFromState {
   selectedLocation?: Location,
@@ -48,7 +50,8 @@ const Locations: FunctionComponent<AllProps> = ({ data, fetchLocations, loading,
   return (
     // TODO Add loading or ghost components while waiting response from the user
     <Container>
-      {!loading && data &&
+      {loading ? 
+        <ReactLoading type='spin' color={V.Color.blue}/> :
         data.map(location => {
           const isSelected = selectedLocation.woeid === location.woeid;
           return (
