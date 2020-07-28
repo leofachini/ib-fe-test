@@ -12,7 +12,7 @@ import ShowersIcon from './Showers.svg';
 import SleetIcon from './Sleet.svg';
 import SnowIcon from './Snowing.svg';
 import ThunderstormIcon from './Thunderstorm.svg';
-import Weather from '../../interfaces/Weather';
+import { Weather } from '../../store/weatherForecast';
 import WeatherState from '../../constants/WeatherState';
 import * as V from '../../styles/variables';
 
@@ -28,7 +28,7 @@ const Card = styled.div`
   flex-direction: column;
   height: 350px;
   padding: 10px;
-  width: 200px;
+  width: 180px;
 `;
 
 const WeekDayLabel = styled.span`
