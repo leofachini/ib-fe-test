@@ -9,6 +9,10 @@ const store = configureStore({
   locations: {
     data: [],
     loading: false
+  },
+  weatherForecast: {
+    data: [],
+    loading: false
   }
 });
 
